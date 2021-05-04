@@ -8,6 +8,9 @@ from pathlib import Path
 import os
 
 
+#adding in a line to test git!
+print("hello, world") 
+
 def main():
     files = []
     for entry in os.scandir(path='C:\\Users\\Harry\\Projects\\CS50_Final_Project\\test_source'):
