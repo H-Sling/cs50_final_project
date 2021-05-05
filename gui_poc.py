@@ -4,10 +4,24 @@
 import tkinter as tk
 #import the POC to run it in this code also
 import poc
+# handling my image
+from PIL import ImageTk, Image
 
 
 # Create the window 
 window = tk.Tk()
+
+# display an image at the top of the screen (POC)
+# open the image file and resize so that it is about the size of a logo
+logo = Image.open("C:\\Users\\Harry\\Projects\\CS50_Final_Project\\cs50_final_project\\quizy_logo.tiff")
+logo = logo.resize((100, 100), Image.ANTIALIAS)
+
+# add the logo to a label TO DO - add this label to a frame that is the width of the GUI
+logo_img = ImageTk.PhotoImage(logo)
+label1 = tk.Label(image=logo_img)
+label1.image = logo_img
+label1.place(x=0, y=0)
+
 #create a label and add the label to the window using the pack fucniton
 greeting = tk.Label(
     text = "Press the Button to sort your folders",
