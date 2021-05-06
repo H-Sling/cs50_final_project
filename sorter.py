@@ -10,8 +10,8 @@ import os
 
 # To Do - Need to make it so that the source dir can be user selected
 
-def Sort():
-    source = input("Which folder do you want to sort?")
+def Sort(src):
+    source = src
     files = []
     for entry in os.scandir(path=source):
         files.append(entry.path)

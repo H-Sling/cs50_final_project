@@ -1,53 +1,79 @@
-#The below code is a POC for triggering the sorting code from a GUI button
+# TODO - switch from POC to sorter funciton
+# TODO - make labels responsive to text
+# TODO - allows destination files to be user selected via GUI
+# TODO - improve UI for version 1
+# TODO - V2 - give use a list of all found file types and ask where to send each
 
-# import the python GUI libary as tk for easier typing in the future. 
+
+# import the python GUI libary as tk for easier typing in the future. Import filedialog to use native file explorer 
 import tkinter as tk
-#import the POC to run it in this code also
+from tkinter import filedialog
+#import the POC file (sort fucntion) to run it in this code also
 import poc
-# handling my image
+# Import pillows in order to handle the logo
 from PIL import ImageTk, Image
 
 
-# Create the window 
+# Create the window on the users screen
 window = tk.Tk()
 
-# display an image at the top of the screen (POC)
 # open the image file and resize so that it is about the size of a logo
 logo = Image.open("C:\\Users\\Harry\\Projects\\CS50_Final_Project\\cs50_final_project\\quizy_logo.tiff")
 logo = logo.resize((100, 100), Image.ANTIALIAS)
 
-# add the logo to a label TO DO - add this label to a frame that is the width of the GUI
+# add the logo to a label
 logo_img = ImageTk.PhotoImage(logo)
 label1 = tk.Label(image=logo_img)
 label1.image = logo_img
-label1.place(x=0, y=0)
+label1.pack()
 
-#create a label and add the label to the window using the pack fucniton
+# A welcome message at the top of the app screen
 greeting = tk.Label(
-    text = "Press the Button to sort your folders",
+    text = "Welcome to the tidy app!",
     foreground="black",
     background="white"
     )
 greeting.pack()
-# need to install pillows libary to handle the logo
-# logo - tk.Label()
 
-# Triggers the sort code from the POC file. 
+# Get the user input for the source file when the button is pressed
+def get_src():
+    src = filedialog.askdirectory()
+    source.insert(0, src)
+    return src
+
+#button for the user to choose the source file to sort. 
+select = tk.Button(
+    text="Select File to tidy-up",
+    width=20,
+    height=2,
+    bg="#D4D0C8",
+    fg="black", 
+    borderwidth=5,
+    relief=tk.RAISED, 
+    command=get_src
+)
+select.pack()
+
+# Create a label to store the Source path in; TODO - make the label responsive to the text
+source = tk.Entry()
+source.pack()
+
+# On click - trigger the sort fucntion
 def handle_click():
-    poc.main()
+    poc.main(source.get())
 
-#add a button
-button = tk.Button(
-    text="Sort!",
-    width=10,
-    height=1,
+# Sort button 
+sort = tk.Button(
+    text="sort",
+    width=20,
+    height=2,
     bg="#D4D0C8",
     fg="black", 
     borderwidth=5,
     relief=tk.RAISED, 
     command=handle_click
 )
-button.pack()
+sort.pack()
 
 # necersary to get the window to display from VScode - not an issue if usign Python IDLE
 window.mainloop()

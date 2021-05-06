@@ -8,9 +8,10 @@ from pathlib import Path
 import os
 
 
-def main():
+# main now accepts the argument of src so as to let the user select the folder to sort
+def main(src):
     files = []
-    for entry in os.scandir(path='C:\\Users\\Harry\\Projects\\CS50_Final_Project\\test_source'):
+    for entry in os.scandir(path=src):
         files.append(entry.path)
 
     for item in files:
@@ -20,6 +21,7 @@ def main():
        # print("Sucessfully Completed")
 
 
+#TODO - make destination files users editable through GUI
 def run_copy(item):
     # define the destination folders and the source file
     txt_dst = "C:\\Users\\Harry\\Projects\\CS50_Final_Project\\test_dst_txt"
