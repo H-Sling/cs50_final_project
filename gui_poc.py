@@ -1,5 +1,3 @@
-# TODO - switch from POC to sorter funciton
-# TODO - make labels responsive to text
 # TODO - allows destination files to be user selected via GUI
 # TODO - improve UI for version 1
 # TODO - V2 - give use a list of all found file types and ask where to send each
@@ -9,13 +7,14 @@
 import tkinter as tk
 from tkinter import filedialog
 #import the POC file (sort fucntion) to run it in this code also
-import poc
+import sorter
 # Import pillows in order to handle the logo
 from PIL import ImageTk, Image
 
 
 # Create the window on the users screen
 window = tk.Tk()
+window.geometry("500x500")
 
 # open the image file and resize so that it is about the size of a logo
 logo = Image.open("C:\\Users\\Harry\\Projects\\CS50_Final_Project\\cs50_final_project\\quizy_logo.tiff")
@@ -39,7 +38,6 @@ greeting.pack()
 def get_src():
     src = filedialog.askdirectory()
     source.insert(0, src)
-    return src
 
 #button for the user to choose the source file to sort. 
 select = tk.Button(
@@ -55,12 +53,12 @@ select = tk.Button(
 select.pack()
 
 # Create a label to store the Source path in; TODO - make the label responsive to the text
-source = tk.Entry()
+source = tk.Entry(width=75)
 source.pack()
 
 # On click - trigger the sort fucntion
 def handle_click():
-    poc.main(source.get())
+    sorter.Sort(source.get())
 
 # Sort button 
 sort = tk.Button(

@@ -1,6 +1,4 @@
-# First version of the full file sorter - use should be able to select their source and destination folders via a GUI 
-# Further enhancements to come will include the ability to extract all file extentions found in a folder and ask the user to specify which folder to send each to
-# libary for file manipulation (particualry copy)
+# libary for file manipulation
 from shutil import move
 # to read the file extention
 from pathlib import Path
@@ -11,34 +9,30 @@ import os
 # To Do - Need to make it so that the source dir can be user selected
 
 def Sort(src):
-    source = src
     files = []
-    for entry in os.scandir(path=source):
+    for entry in os.scandir(path=src):
         files.append(entry.path)
 
     # Define the destination folders
-    txt_dst = input("Select a folder to sort .txt files in")
-    img_dst = input("Select a folder to sort .JPG files in")
-    pdf_dst = input("Select a folder to sort .pdf files in")
+    txt_dst = "C:\\Users\\Harry\\Projects\\CS50_Final_Project\\test_dst_txt"
+    img_dst = "C:\\Users\\Harry\\Projects\\CS50_Final_Project\\test_dst_img"
+    pdf_dst = "C:\\Users\\Harry\\Projects\\CS50_Final_Project\\test_dst_pdf"
 
-    for src in files:    
+    for item in files:    
         # Get the file extention for sorting
-        file_extention = Path(src).suffix
+        file_extention = Path(item).suffix
 
         # sort based on the file extention
         if file_extention == ".txt":
-            move(src, txt_dst)
+            move(item, txt_dst)
         elif file_extention == ".JPG":
-            move(src, img_dst)
+            move(item, img_dst)
         elif file_extention == ".pdf":
-            move(src, pdf_dst)
+            move(item, pdf_dst)
         else:
             print("Error")
             return False
     
     return True
-
-# Users can now select the source and destination folders via CMD
-# Sort()
 
 
