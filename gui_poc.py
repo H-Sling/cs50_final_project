@@ -62,7 +62,7 @@ def handle_click():
 
 # Sort button 
 sort = tk.Button(
-    text="sort",
+    text="Tidy",
     width=20,
     height=2,
     bg="#D4D0C8",
