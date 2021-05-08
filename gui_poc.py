@@ -40,8 +40,8 @@ def get_src():
     source.insert(0, src)
 
 #button for the user to choose the source file to sort. 
-select = tk.Button(
-    text="Select File to tidy-up",
+browse_src = tk.Button(
+    text="Select Folder to tidy-up",
     width=20,
     height=2,
     bg="#D4D0C8",
@@ -50,15 +50,37 @@ select = tk.Button(
     relief=tk.RAISED, 
     command=get_src
 )
-select.pack()
+browse_src.pack()
 
 # Create a label to store the Source path in; TODO - make the label responsive to the text
 source = tk.Entry(width=75)
 source.pack()
 
+# Get the user input for the source file when the button is pressed
+def get_dst1():
+    dst = filedialog.askdirectory()
+    dst1.insert(0, dst)
+
+#button for the user to choose the source file to sort. 
+browse_dst1 = tk.Button(
+    text="Select folder to send .txt files to",
+    width=20,
+    height=2,
+    bg="#D4D0C8",
+    fg="black", 
+    borderwidth=5,
+    relief=tk.RAISED, 
+    command=get_dst1
+)
+browse_dst1.pack()
+
+# Create a label to store the Source path in; TODO - make the label responsive to the text
+dst1 = tk.Entry(width=75)
+dst1.pack()
+
 # On click - trigger the sort fucntion
 def handle_click():
-    sorter.Sort(source.get())
+    sorter.Sort(source.get(), dst1.get())
 
 # Sort button 
 sort = tk.Button(

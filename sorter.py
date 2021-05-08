@@ -8,13 +8,13 @@ import os
 
 # To Do - Need to make it so that the source dir can be user selected
 
-def Sort(src):
+def Sort(src, dst_txt):
     files = []
     for entry in os.scandir(path=src):
         files.append(entry.path)
 
     # Define the destination folders
-    txt_dst = "C:\\Users\\Harry\\Projects\\CS50_Final_Project\\test_dst_txt"
+    txt_dst = dst_txt
     img_dst = "C:\\Users\\Harry\\Projects\\CS50_Final_Project\\test_dst_img"
     pdf_dst = "C:\\Users\\Harry\\Projects\\CS50_Final_Project\\test_dst_pdf"
 
