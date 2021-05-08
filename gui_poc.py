@@ -2,7 +2,8 @@
     # Make a dropdown list autopopulate based on the file extentions found in source and
     # ensure that the users entry is taken into the sort fucniton. 
     # copy the existing destination frame to get the app working in POC form again
-#TODO - add a "+" button to allow the user to add more rows for further file types and destinations
+# TODO - add a "+" button to allow the user to add more rows for further file types and destinations
+# TODO - make it so that any unsorted file types simply are left in the root folder (maybe a warning?)
 # TODO - improve UI
 
 
