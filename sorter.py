@@ -30,8 +30,7 @@ def Sort(src, dst_txt):
         elif file_extention == ".pdf":
             move(item, pdf_dst)
         else:
-            print("Error")
-            return False
+            break
     
     return True
 
