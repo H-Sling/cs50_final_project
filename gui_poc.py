@@ -121,10 +121,11 @@ dst1.grid(row=0, column=1)
 
 # On click - trigger the sort fucntion
 def handle_click():
-    sorter.Sort(source.get(), dst1.get())
+    sorter.Sort(source.get(), dst1.get(), file_type1.get())
 
 # Sort button 
 sort = tk.Button(
+    master=frame_button,
     text="Tidy",
     width=20,
     height=2,
@@ -132,8 +133,8 @@ sort = tk.Button(
     fg="black", 
     borderwidth=5,
     relief=tk.RAISED, 
-    command=handle_click,
-    master=frame_button
+    command=handle_click
+    
 )
 sort.pack()
 
