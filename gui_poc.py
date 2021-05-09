@@ -1,8 +1,8 @@
 # TODO SUnday 9th May - get dropdown of file extentions found in the root folder
-    # Make a dropdown list autopopulate based on the file extentions found in source and
+    # allow users to enter multiple file types and destinations and make the sort fucntion handle that. 
     # ensure that the users entry is taken into the sort fucniton. 
     # copy the existing destination frame to get the app working in POC form again
-# TODO - add a "+" button to allow the user to add more rows for further file types and destinations
+# TODO - Make a dropdown list autopopulate based on the file extentions found in source and
 # TODO - make it so that any unsorted file types simply are left in the root folder (maybe a warning?)
 # TODO - improve UI
 
@@ -120,6 +120,7 @@ dst1 = tk.Entry(frame_dst1_entry, width=50)
 dst1.grid(row=0, column=1)
 
 # On click - trigger the sort fucntion
+# NOTE: Does this fucntion need to be triggered mutliple times and only handle one file type and destination at a time?
 def handle_click():
     sorter.Sort(source.get(), dst1.get(), file_type1.get())
 
@@ -127,16 +128,15 @@ def handle_click():
 sort = tk.Button(
     master=frame_button,
     text="Tidy",
-    width=20,
-    height=2,
+    width=7,
+    height=1,
     bg="#D4D0C8",
     fg="black", 
     borderwidth=5,
     relief=tk.RAISED, 
-    command=handle_click
-    
+    command=handle_click  
 )
 sort.pack()
 
-# necersary to get the window to display from VScode - not an issue if usign Python IDLE
+# necersary to get the window to display
 window.mainloop()
