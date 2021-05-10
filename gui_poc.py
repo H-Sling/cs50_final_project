@@ -1,4 +1,4 @@
-# TODO - ensure that each new line created keeps count and names the elements uniquely 
+# TODO - ensure that each new line created keeps names the elements uniquely 
 # TODO - Make a dropdown list autopopulate based on the file extentions found in source and
 # TODO - make it so that any unsorted file types simply are left in the root folder (maybe a warning?)
 # TODO - improve UI
@@ -82,10 +82,14 @@ source.grid(row=0, column=0)
 
 # Define the lists of elements for the dst lines
 #frame_dst_
+dst1 = ""
+file_type1 = ""
 
 def new_dst():
     #referance global variables
     global dst_count
+    global dst1
+    global file_type1
 
     # Get the user input for the source file when the button is pressed
     def get_dst():
