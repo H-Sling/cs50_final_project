@@ -81,20 +81,19 @@ source = tk.Entry(master=frame_src_entry, width=55)
 source.grid(row=0, column=0)
 
 # Define the lists of elements for the dst lines
-#frame_dst_
-dst1 = ""
-file_type1 = ""
+dst = ""
+file_type = ""
 
 def new_dst():
     #referance global variables
     global dst_count
-    global dst1
-    global file_type1
+    global dst
+    global file_type
 
     # Get the user input for the source file when the button is pressed
     def get_dst():
-        dst = filedialog.askdirectory()
-        dst1.insert(0, dst)
+        dst_loc = filedialog.askdirectory()
+        dst.insert(0, dst_loc)
 
 
     # layout for the source section
@@ -104,15 +103,15 @@ def new_dst():
     frame_dst_entry.pack()
 
     # Instructional Label
-    dst1_label = tk.Label(frame_dst_inst, text="Select the file type and destination folder!")
-    dst1_label.pack()
+    dst_label = tk.Label(frame_dst_inst, text="Select the file type and destination folder!")
+    dst_label.pack()
 
     # Placeholder for file type dropdown
-    file_type1 = tk.Entry(frame_dst_entry, width=5)
-    file_type1.grid(row=0, column=0)
+    file_type = tk.Entry(frame_dst_entry, width=5)
+    file_type.grid(row=0, column=0)
 
     #button for the user to choose the source file to sort. 
-    browse_dst1 = tk.Button(
+    browse_dst = tk.Button(
         master=frame_dst_entry,
         text="Browse",
         width=7,
@@ -123,11 +122,11 @@ def new_dst():
         relief=tk.RAISED, 
         command=get_dst
     )
-    browse_dst1.grid(row=0, column=2)
+    browse_dst.grid(row=0, column=2)
 
     # Create a label to store the Source path in; TODO - make the label responsive to the text
-    dst1 = tk.Entry(frame_dst_entry, width=50)
-    dst1.grid(row=0, column=1)
+    dst = tk.Entry(frame_dst_entry, width=50)
+    dst.grid(row=0, column=1)
 
     # Keep count of the number of dsts added - NOT WORKING!
     dst_count = dst_count + 1
@@ -150,9 +149,9 @@ sort.pack()
 # On click - trigger the sort fucntion
 # NOTE: Does this fucntion need to be triggered mutliple times and only handle one file type and destination at a time?
 def handle_click():
-    print(dst_count)
+    print(dst_count) #for debug only
     for i in range(dst_count):
-        sorter.Sort(source.get(), dst1.get(), file_type1.get())
+        sorter.Sort(source.get(), dst.get(), file_type.get())
 
 # Sort button 
 sort = tk.Button(
