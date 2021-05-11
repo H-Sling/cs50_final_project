@@ -1,7 +1,7 @@
-# TODO - ensure that each new line created keeps names the elements uniquely 
-# TODO - Make a dropdown list autopopulate based on the file extentions found in source and
+# TODO - Make a dropdown list autopopulate based on the file extentions found in source (alternativly provide the user with a list of 
+#        file types)
 # TODO - make it so that any unsorted file types simply are left in the root folder (maybe a warning?)
-# TODO - improve UI
+# TODO - improve UI - add delete button to remove a line
 
 
 # import the python GUI libary as tk for easier typing in the future. Import filedialog to use native file explorer 
@@ -81,19 +81,20 @@ source = tk.Entry(master=frame_src_entry, width=55)
 source.grid(row=0, column=0)
 
 # Define the lists of elements for the dst lines
-dst = ""
-file_type = ""
+dst = []
+file_type = []
 
 def new_dst():
     #referance global variables
     global dst_count
     global dst
     global file_type
+    i = dst_count
 
     # Get the user input for the source file when the button is pressed
     def get_dst():
         dst_loc = filedialog.askdirectory()
-        dst.insert(0, dst_loc)
+        dst[i].insert(0, dst_loc)
 
 
     # layout for the source section
@@ -107,8 +108,9 @@ def new_dst():
     dst_label.pack()
 
     # Placeholder for file type dropdown
-    file_type = tk.Entry(frame_dst_entry, width=5)
-    file_type.grid(row=0, column=0)
+    typ = tk.Entry(frame_dst_entry, width=5)
+    file_type.append(typ)
+    file_type[i].grid(row=0, column=0)
 
     #button for the user to choose the source file to sort. 
     browse_dst = tk.Button(
@@ -125,11 +127,12 @@ def new_dst():
     browse_dst.grid(row=0, column=2)
 
     # Create a label to store the Source path in; TODO - make the label responsive to the text
-    dst = tk.Entry(frame_dst_entry, width=50)
-    dst.grid(row=0, column=1)
+    destination = tk.Entry(frame_dst_entry, width=50)
+    dst.append(destination)
+    dst[i].grid(row=0, column=1)
 
     # Keep count of the number of dsts added - NOT WORKING!
-    dst_count = dst_count + 1
+    dst_count += 1
 
 new_dst()
 
@@ -149,9 +152,8 @@ sort.pack()
 # On click - trigger the sort fucntion
 # NOTE: Does this fucntion need to be triggered mutliple times and only handle one file type and destination at a time?
 def handle_click():
-    print(dst_count) #for debug only
     for i in range(dst_count):
-        sorter.Sort(source.get(), dst.get(), file_type.get())
+        sorter.Sort(source.get(), dst[i].get(), file_type[i].get())
 
 # Sort button 
 sort = tk.Button(
