@@ -15,8 +15,6 @@ def Sort(src, dst1, fle1):
 
     # Define the destination folders
     dst_1 = dst1
-    #img_dst = "C:\\Users\\Harry\\Projects\\CS50_Final_Project\\test_dst_img"
-    #pdf_dst = "C:\\Users\\Harry\\Projects\\CS50_Final_Project\\test_dst_pdf"
 
     for item in files:    
         # Get the file extention for sorting
@@ -25,12 +23,6 @@ def Sort(src, dst1, fle1):
         # sort based on the file extention
         if file_extention == fle1:
             move(item, dst_1)
-        #elif file_extention == ".JPG":
-            #move(item, img_dst)
-        #elif file_extention == ".pdf":
-            #move(item, pdf_dst)
-        #else:
-            #break
     
     return True
 

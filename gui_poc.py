@@ -11,6 +11,10 @@ from tkinter import filedialog
 import sorter
 # Import pillows in order to handle the logo
 from PIL import ImageTk, Image
+# to read the file extention
+from pathlib import Path
+# libary to read from the directory
+import os
 
 
 # Global Variables
@@ -24,12 +28,14 @@ window.title("Tidy App")
 #create the frames for the desired layout
 frame_header = tk.Frame(master = window, pady=2, padx=2)
 frame_src = tk.Frame(master = window, pady=2, padx=2)
+frame_file_types = tk.Frame(master = window, pady=2, padx=2)
 frame_dst = tk.Frame(master = window, pady=2, padx=2)
 frame_button = tk.Frame(master = window, pady=2, padx=2)
 frame_header.grid(row=0, column=0)
 frame_src.grid(row=1, column=0)
-frame_dst.grid(row=2, column=0)
-frame_button.grid(row=3, column=0)
+frame_file_types.grid(row=2, column=0)
+frame_dst.grid(row=3, column=0)
+frame_button.grid(row=4, column=0)
 
 # open the image file and resize so that it is about the size of a logo
 logo = Image.open("C:\\Users\\Harry\\Projects\\CS50_Final_Project\\cs50_final_project\\quizy_logo.tiff")
@@ -55,8 +61,29 @@ frame_src_entry.pack()
 
 # Get the user input for the source file when the button is pressed
 def get_src():
+
+    # Clear any previous entries
+    source.delete(0, "end")
+    ext.delete(0, "end")
+
+    # Populate the Source box
     src = filedialog.askdirectory()
     source.insert(0, src)
+
+    # Identify the files in the source folder
+    files = []
+    for entry in os.scandir(path=src):
+        files.append(entry.path)    
+
+    # Identify and sotre the file extentions
+    file_ext = []
+    for item in files:    
+        # Ensure no duplications in what is presented to the user
+        if Path(item).suffix not in file_ext:
+            file_ext.append(Path(item).suffix)
+    
+    # Display the file extentions in the label
+    ext.insert(0, file_ext)
 
 # Instructional Label
 src_label = tk.Label(text="Select a folder to tidy!", master=frame_src_inst)
@@ -79,6 +106,13 @@ browse_src.grid(row=0, column=1)
 # Create a label to store the Source path in
 source = tk.Entry(master=frame_src_entry, width=55)
 source.grid(row=0, column=0)
+
+# Code and label to return a list of file types
+ext_label = tk.Label(frame_file_types, text="File Types in Source Folder")
+ext_label.pack()
+ext = tk.Entry(frame_file_types)
+ext.pack()
+
 
 # Define the lists of elements for the dst lines
 dst = []
