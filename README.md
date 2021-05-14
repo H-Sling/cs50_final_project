@@ -12,8 +12,8 @@ While the python code used in this project is realtivly simple, the construction
  The sorter.py file is the code which is behind the "..." button. This is written in python and makes use of the shutil libary to move files between folders, and the pathlib and OS liaries to read the files and find the file extentions as in the GUI file. While the main sorting code is quite simple (~10 lines) this function attempts to accomodate posisble user errors to either produce a favorable result, or display a visual error in a worse case situation to allow the user to correct their error. 
 
 #### How to use
-1 - Open the appliation
-2 - Chose the folder to be tidied by click on "Browse" to open file exporer or manually typing the file location
-3 - Once you have chose your destination folder, the applicaiton will automatically create a new line for each file type which is found in the folder. Chose a destination for each file type through the "Browse" button, or by manually typeing the desitnation folder location. 
-4 - If you dont wish to move a certian file type from its original location - simply leave the destination blank. 
-5 - Once all destination folders are assigned, click on the tidy button to sort the files to the desired destinations.
+1. Open the appliation
+2. Chose the folder to be tidied by click on "Browse" to open file exporer or manually typing the file location
+3. Once you have chose your destination folder, the applicaiton will automatically create a new line for each file type which is found in the folder. Chose a destination for each file type through the "Browse" button, or by manually typeing the desitnation folder location. 
+4. If you dont wish to move a certian file type from its original location - simply leave the destination blank. 
+5. Once all destination folders are assigned, click on the tidy button to sort the files to the desired destinations.
