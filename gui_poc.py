@@ -1,4 +1,5 @@
 # TODO - make it so that any unsorted file types simply are left in the root folder (maybe a warning?)
+# TODO - think or some dumb user mistakes and account for them (e.g. destination does exist gives a visible error message)
 # TODO - improve UI - 
         # give the widow a scroll bar if dst extend off bottom of screen
         # add delete button to remove a line
@@ -40,7 +41,7 @@ frame_dst.grid(row=2, column=0)
 frame_button.grid(row=3, column=0)
 
 # open the image file and resize
-logo = Image.open("quizy_logo.tiff")
+logo = Image.open("C:\\Users\\Harry\\Projects\\CS50_Final_Project\\cs50_final_project\\quizy_logo.tiff")
 logo = logo.resize((100, 100), Image.ANTIALIAS)
 logo_img = ImageTk.PhotoImage(logo)
 label1 = tk.Label(image=logo_img, master = frame_header)
