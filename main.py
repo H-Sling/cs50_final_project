@@ -1,14 +1,12 @@
-# TODO - make a desktop icon for the app - needs converting to .exe file
-
-
 # import the python GUI libary as tk for easier typing in the future.
 # Import StrngVar to create read only entry fields. 
 # Import filedialog to use native file explorer.
 # Import messagebox to display message to the user
+# Import constraints 
 import tkinter as tk
 from tkinter import StringVar, filedialog, messagebox
 from tkinter.constants import DISABLED, RIGHT, Y
-#import the sorter function code
+# import the sorter function code
 import sorter
 # Import pillows in order to handle the logo
 from PIL import ImageTk, Image
@@ -27,7 +25,6 @@ file_type = []
 window = tk.Tk()
 window.geometry("500x500")
 window.title("File Tidy")
-# Add the logo rather than the Tkinter feather
 window.iconbitmap("C:\\Users\\Harry\\Projects\\CS50_Final_Project\\cs50_final_project\\quizy.ico")
 
 # Create the frames for the desired layout
@@ -154,12 +151,14 @@ def get_src():
         if Path(item).suffix not in file_exts:
             file_exts.append(Path(item).suffix)
     
+    # Filter to remove blanks from the list
+    file_exts = list(filter(None, file_exts))
+    
     # Give the user an error if the folder has no files.
     if not file_exts:
         messagebox.showerror("No files found at location", "There are no files in this folder!")
-
-    # Display the file extentions in the label after filtering out any blank values (e.g. folders)
-    file_exts = list(filter(None, file_exts))
+    
+    # Display the file extentions in the label
     for file_ext in file_exts:
         new_dst()
 
