@@ -1,7 +1,5 @@
 # TODO - improve UI - 
         # give the widow a scroll bar if dst extend off bottom of screen
-        # add delete button to remove a line
-        # make it so that clicking the browse button resets the desination frames
 # TODO - make a desktop icon for the app
 
 
@@ -11,7 +9,7 @@
 # Import messagebox to display message to the user
 import tkinter as tk
 from tkinter import StringVar, filedialog, messagebox
-from tkinter.constants import DISABLED
+from tkinter.constants import DISABLED, RIGHT, Y
 #import the sorter function code
 import sorter
 # Import pillows in order to handle the logo
@@ -37,10 +35,10 @@ frame_header = tk.Frame(master = window, pady=2, padx=2)
 frame_src = tk.Frame(master = window, pady=2, padx=2)
 frame_dst = tk.Frame(master = window, pady=2, padx=2)
 frame_button = tk.Frame(master = window, pady=2, padx=2)
-frame_header.grid(row=0, column=0)
-frame_src.grid(row=1, column=0)
-frame_dst.grid(row=2, column=0)
-frame_button.grid(row=3, column=0)
+frame_header.pack()
+frame_src.pack()
+frame_dst.pack()
+frame_button.pack()
 
 # Open the image file and resize
 logo = Image.open("C:\\Users\\Harry\\Projects\\CS50_Final_Project\\cs50_final_project\\quizy_logo.tiff")
@@ -127,9 +125,19 @@ def new_dst():
 def get_src():
 
     global file_exts
+    global dst_count
+    global file_exts
+    global dst
+    global file_type
 
-    # Clear any previous entries
+    # Clear any previous entries and clear the dst frames & data
     source.delete(0, "end")
+    dst_count = 0
+    file_exts =[]
+    dst = []
+    file_type = []
+    for widget in frame_dst.winfo_children():
+        widget.pack_forget()
 
     # Populate the Source box
     src = filedialog.askdirectory()
@@ -149,8 +157,9 @@ def get_src():
     # Give the user an error if the folder has no files.
     if not file_exts:
         messagebox.showerror("No files found at location", "There are no files in this folder!")
-        
-    # Display the file extentions in the label
+
+    # Display the file extentions in the label after filtering out any blank values (e.g. folders)
+    file_exts = list(filter(None, file_exts))
     for file_ext in file_exts:
         new_dst()
 
