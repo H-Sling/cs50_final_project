@@ -1,4 +1,3 @@
-# TODO - Display an error if no files are in the source folder
 # TODO - improve UI - 
         # give the widow a scroll bar if dst extend off bottom of screen
         # add delete button to remove a line
@@ -147,6 +146,10 @@ def get_src():
         if Path(item).suffix not in file_exts:
             file_exts.append(Path(item).suffix)
     
+    # Give the user an error if the folder has no files.
+    if not file_exts:
+        messagebox.showerror("No files found at location", "There are no files in this folder!")
+        
     # Display the file extentions in the label
     for file_ext in file_exts:
         new_dst()
