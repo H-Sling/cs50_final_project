@@ -1,25 +1,28 @@
-# TODO - make it so that any unsorted file types simply are left in the root folder (maybe a warning?)
-# TODO - think or some dumb user mistakes and account for them (e.g. destination does exist gives a visible error message)
+# TODO - Display an error if no files are in the source folder
 # TODO - improve UI - 
         # give the widow a scroll bar if dst extend off bottom of screen
         # add delete button to remove a line
         # make it so that clicking the browse button resets the desination frames
+# TODO - make a desktop icon for the app
 
 
-# import the python GUI libary as tk for easier typing in the future. Import filedialog to use native file explorer 
+# import the python GUI libary as tk for easier typing in the future.
+# Import StrngVar to create read only entry fields. 
+# Import filedialog to use native file explorer.
+# Import messagebox to display message to the user
 import tkinter as tk
-from tkinter import filedialog
+from tkinter import StringVar, filedialog, messagebox
+from tkinter.constants import DISABLED
 #import the sorter function code
 import sorter
 # Import pillows in order to handle the logo
 from PIL import ImageTk, Image
-# to read the file extention
+# Import Path and OS in order to check the folders exist and read the file extentions
 from pathlib import Path
-# in order to read the files in the source folder
-from os import scandir
+import os
 
 
-# Global Variables
+# Global Variables that need to be used by various functions
 dst_count = 0
 file_exts =[]
 dst = []
@@ -30,7 +33,7 @@ window = tk.Tk()
 window.geometry("500x500")
 window.title("Tidy App")
 
-#create the frames for the desired layout
+# Create the frames for the desired layout
 frame_header = tk.Frame(master = window, pady=2, padx=2)
 frame_src = tk.Frame(master = window, pady=2, padx=2)
 frame_dst = tk.Frame(master = window, pady=2, padx=2)
@@ -40,7 +43,7 @@ frame_src.grid(row=1, column=0)
 frame_dst.grid(row=2, column=0)
 frame_button.grid(row=3, column=0)
 
-# open the image file and resize
+# Open the image file and resize
 logo = Image.open("C:\\Users\\Harry\\Projects\\CS50_Final_Project\\cs50_final_project\\quizy_logo.tiff")
 logo = logo.resize((100, 100), Image.ANTIALIAS)
 logo_img = ImageTk.PhotoImage(logo)
@@ -70,6 +73,7 @@ def new_dst():
     global dst
     global file_type
     global file_exts
+    # For easier use in this fucntion
     i = dst_count
 
     # Destination browse button action
@@ -87,11 +91,16 @@ def new_dst():
     dst_label = tk.Label(frame_dst_inst, text="Select a destination folder for this file type!")
     dst_label.pack()
 
-    # Populate the file types
-    typ = tk.Entry(frame_dst_entry, width=5)
+    # Populate the file types in read only entry fields
+    fletyp = StringVar()
+    typ = tk.Entry(frame_dst_entry,
+        textvariable=fletyp,
+        state=DISABLED, 
+        width=5
+        )
     file_type.append(typ)
     file_type[i].grid(row=0, column=0)
-    file_type[i].insert(0, file_exts[i])
+    fletyp.set(file_exts[i])
 
     # Destination Browse button
     browse_dst = tk.Button(
@@ -118,7 +127,6 @@ def new_dst():
 # Get the user input for the source file when the button is pressed
 def get_src():
 
-    global dst_count
     global file_exts
 
     # Clear any previous entries
@@ -130,7 +138,7 @@ def get_src():
 
     # Identify the files in the source folder
     files = []
-    for entry in scandir(path=src):
+    for entry in os.scandir(path=src):
         files.append(entry.path)    
 
     # Identify and sotre the file extentions
@@ -165,11 +173,32 @@ browse_src.grid(row=0, column=1)
 source = tk.Entry(master=frame_src_entry, width=55)
 source.grid(row=0, column=0)
 
-# On click - trigger the sort fucntion
-# NOTE: Does this fucntion need to be triggered mutliple times and only handle one file type and destination at a time?
+# Tidy button code
 def handle_click():
+    # Display an error message if the user has not selected a sorce folder
+    if not source.get():
+        messagebox.showerror("No folder selected", "Please select a folder to tidy!")
+        return
+    # Display an error message if the source folder cannot be located
+    if not os.path.isdir(source.get()):
+        messagebox.showerror("Error", "Source folder cannot be found. Please check input")
+        return
+    
+    # Check and process the desired destination folders
     for i in range(dst_count):
-        sorter.Sort(source.get(), dst[i].get(), file_type[i].get())
+        # If the destination is blank - ignore
+        if not dst[i].get():
+            continue
+        # Display an error message if the destination folder cannot be located
+        elif not os.path.isdir(dst[i].get()):
+            messagebox.showerror("Error", f"Destination folder for {file_type[i].get()} file type could not be located")
+            break
+        # If all checks have been passed, execute the sort code.
+        else:
+            sorter.Sort(source.get(), dst[i].get(), file_type[i].get())
+    # Inform the user that the sort completed without errors. Need to display different error if code errored out
+    messagebox.showinfo("Complete", "All files have been moved to their destination folders")
+    return
 
 # Sort button 
 sort = tk.Button(

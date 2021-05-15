@@ -10,8 +10,6 @@ import os
 
 def Sort(src, dst, fle):
     files = []
-    if not dst:
-        return
     for entry in os.scandir(path=src):
         files.append(entry.path)
 
