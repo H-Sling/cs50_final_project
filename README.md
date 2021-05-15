@@ -1,7 +1,7 @@
-# cs50_final_project
+# File Tidy
 #### Video Demo:  
 #### Description
-The [...] app helps users to organise their cluttered folders in a user friendly and quick way. The main use of this application would be to sort neglatected download folders, however the user can chose any source folder and so any folder with mutltiple files types can be sorted. 
+The File Tidy app helps users to organise their cluttered folders in a user friendly and quick way. The main use of this application would be to sort neglatected download folders, however the user can chose any source folder and so any folder with mutltiple files types can be sorted. 
 
 The application is designed to be as user friedly as possible. The app makes use of the native file explorers on the users machine to allow for easy file identification. Once a folder is selected, the applicaiton will create a new line for each file type that was found in the source folder, simplifying the process for the user, and allowing for the user to select any destination folder (or none) that they desire. 
 
