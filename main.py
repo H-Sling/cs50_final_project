@@ -25,7 +25,7 @@ file_type = []
 window = tk.Tk()
 window.geometry("500x500")
 window.title("File Tidy")
-window.iconbitmap("C:\\Users\\Harry\\Projects\\CS50_Final_Project\\cs50_final_project\\quizy.ico")
+window.iconbitmap("cs50_final_project\\quizy.ico")
 
 # Create the frames for the desired layout
 frame_header = tk.Frame(master = window, pady=2, padx=2)
@@ -38,7 +38,7 @@ frame_dst.pack()
 frame_button.pack()
 
 # Open the image file and resize
-logo = Image.open("C:\\Users\\Harry\\Projects\\CS50_Final_Project\\cs50_final_project\\quizy_logo.png")
+logo = Image.open("cs50_final_project\\quizy_logo.png")
 logo = logo.resize((100, 100), Image.ANTIALIAS)
 logo_img = ImageTk.PhotoImage(logo)
 label1 = tk.Label(image=logo_img, master = frame_header)
